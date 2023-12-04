@@ -38,6 +38,11 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
   };
 
   return (
-    <input ref={inputRef} className="InputBuffer" onKeyDown={handleKeyDown} />
+    <input
+      ref={inputRef}
+      className="InputBuffer"
+      onKeyDown={handleKeyDown}
+      autoFocus
+    />
   );
 };
