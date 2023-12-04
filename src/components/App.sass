@@ -1,0 +1,30 @@
+@use '../variables'
+
+$below-header-height: calc(100vh - (variables.$padding-top + variables.$padding-bottom + variables.$font-size))
+
+.App
+  display: grid
+  grid-template-areas: "header header" "main sidebar"
+  grid-template-rows: auto
+  grid-template-columns: 5fr 1fr
+  overflow: hidden
+
+  > h1
+    background: variables.$header-background
+    color: variables.$header-foreground
+    display: block
+    grid-area: header
+    padding: variables.$padding
+    width: 100%
+
+  > .main, > .StackDisplay
+    max-height: $below-header-height
+    min-height: $below-header-height
+    height: $below-header-height
+    overflow-y: scroll
+
+  > .main
+    grid-area: main
+
+  > .StackDisplay
+    grid-area: sidebar

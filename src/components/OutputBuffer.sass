@@ -1,0 +1,16 @@
+@use '../variables'
+
+.OutputBuffer
+  list-style: none
+
+  li
+    padding: variables.$padding
+
+    &:hover
+      background: variables.$output-buffer-hover-background
+
+    &.error
+      color: variables.$output-buffer-error-foreground
+
+    &.input
+      color: variables.$output-buffer-input-foreground
