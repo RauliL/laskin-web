@@ -12,7 +12,7 @@
   "author": "Rauli Laine <rauli.laine@iki.fi>",
   "main": "./build/index.js",
   "main:src": "./src/index.ts",
-  "homepage": "https://github.com/RauliL/laskin-web",
+  "homepage": "https://rauli.dev/laskin-web",
   "repository": {
     "type": "git",
     "url": "https://github.com/RauliL/laskin-web"
