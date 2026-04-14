@@ -6334,10 +6334,10 @@ language-tags@^1.0.9:
   dependencies:
     language-subtag-registry "^0.3.20"
 
-laskin@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/laskin/-/laskin-2.0.0.tgz#806be1cf0aec36b5796a3d951a266197d4348bcd"
-  integrity sha512-PL/N3osCyygRgERROG5Eni8aVUt5a4p2fbYZKIMACPOcxqYBNMjUTkb/WiZdkh8Mnu1Jqfr2gRYByLHSf/uXkQ==
+laskin@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/laskin/-/laskin-2.1.0.tgz#0f5fe2c5c24186760b0af501039e6648f8ac1f1b"
+  integrity sha512-63GqprpWLnE9e3dKSURcXrW+ou7GLaxMIl6BIgJw8Lgi6l6nqcVWkYJf48PHrZNSQ7ZDU/81575jc1Y55th1uQ==
   dependencies:
     date-fns "^2.30.0"
     decimal.js "^10.6.0"

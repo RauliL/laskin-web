@@ -1,4 +1,3 @@
-import { Context } from "laskin";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -6,9 +5,10 @@ import { Provider } from "react-redux";
 import "./index.sass";
 
 import { App } from "./components";
+import { createContext } from "./context";
 import { createStore } from "./store";
 
-const context = new Context();
+const context = createContext();
 const store = createStore();
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
