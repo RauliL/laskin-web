@@ -3712,10 +3712,15 @@ debug@^3.2.7:
   dependencies:
     ms "^2.1.1"
 
-decimal.js@^10.2.1, decimal.js@^10.4.3:
+decimal.js@^10.2.1:
   version "10.4.3"
   resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-10.4.3.tgz#1044092884d245d1b7f65725fa4ad4c6f781cc23"
   integrity sha512-VBBaLc1MgL5XpzgIP7ny5Z6Nx3UrRkIViUkPUdtl9aya5amy3De1gsUUSB1g3+3sExYNjCAsAznmukyxCb1GRA==
+
+decimal.js@^10.6.0:
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-10.6.0.tgz#e649a43e3ab953a72192ff5983865e509f37ed9a"
+  integrity sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==
 
 dedent@^0.7.0:
   version "0.7.0"
@@ -6329,13 +6334,13 @@ language-tags@^1.0.9:
   dependencies:
     language-subtag-registry "^0.3.20"
 
-laskin@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/laskin/-/laskin-1.4.0.tgz#3c24343265a80d0c427e54bf8ef99f6a48ee0079"
-  integrity sha512-lRrlu7U0/4cmrp5lXfBshyUPONjbkyrtynWf2GlV+yRyceMBONwis2e/nGsM4xM+XeeQjOTrJfHaZUBecC8ocA==
+laskin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/laskin/-/laskin-2.0.0.tgz#806be1cf0aec36b5796a3d951a266197d4348bcd"
+  integrity sha512-PL/N3osCyygRgERROG5Eni8aVUt5a4p2fbYZKIMACPOcxqYBNMjUTkb/WiZdkh8Mnu1Jqfr2gRYByLHSf/uXkQ==
   dependencies:
     date-fns "^2.30.0"
-    decimal.js "^10.4.3"
+    decimal.js "^10.6.0"
     strftime "^0.10.2"
 
 launch-editor@^2.6.0:
