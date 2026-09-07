@@ -1,10 +1,8 @@
-import { LaskinContext, createLaskin } from "laskin";
-import laskinWasmUrl from "../node_modules/laskin/laskin.wasm?url";
+import { LaskinContext, createContext as createLaskin } from "laskin";
+import laskinWasmUrl from "laskin/laskin.wasm?url";
 
 export const createContext = async (): Promise<LaskinContext> => {
-  const context = await createLaskin({
-    locateFile: () => laskinWasmUrl,
-  });
+  const context = await createLaskin({ locateFile: () => laskinWasmUrl });
 
   context.run("(*) -> ×");
   context.run("(/) -> ÷");

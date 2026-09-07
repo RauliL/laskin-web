@@ -323,10 +323,10 @@ is-glob@^4.0.3:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-laskin@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/laskin/-/laskin-3.0.0.tgz#7b3aeeb3e672f0a3be3981be78074705375dc930"
-  integrity sha512-5/saeGGnXJ0KBHXviqQmGt5pjVmCSF9hrD/qy11yl+H5G5ZtZ/z3YqVk94o3YaiBnhANLtBbb21N8BA702vo+A==
+laskin@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/laskin/-/laskin-4.0.0.tgz#936b75132b8612935e5785dae63b9b8dcecc78d7"
+  integrity sha512-y0tFyFPSzkhr/+cs/HfSCNkyiPhmjejNztxkDZEoSt4RJ9pU+BRnTamm/PoyVbD+twGaFsHNOhOBqXF90QdasA==
 
 lightningcss-android-arm64@1.32.0:
   version "1.32.0"
