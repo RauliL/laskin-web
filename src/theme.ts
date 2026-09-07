@@ -44,12 +44,18 @@ export const theme = createTheme({
   },
   components: {
     MuiCssBaseline: {
-      styleOverrides: {
+      styleOverrides: (theme) => ({
+        html: {
+          fontSize: 18,
+          [theme.breakpoints.up("md")]: {
+            fontSize: 16,
+          },
+        },
         body: {
           backgroundColor: gruvbox.outputBackground,
           color: gruvbox.outputForeground,
         },
-      },
+      }),
     },
   },
 });
