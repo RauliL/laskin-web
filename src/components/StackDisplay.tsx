@@ -1,27 +1,34 @@
 import Box from "@mui/material/Box";
+import { SxProps, Theme } from "@mui/material/styles";
 import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 
 import { contentPadding, gruvbox, monospaceFontFamily } from "../theme";
 import { State } from "../store";
 
-export const StackDisplay: FunctionComponent = () => {
+export type StackDisplayProps = {
+  sx?: SxProps<Theme>;
+};
+
+export const StackDisplay: FunctionComponent<StackDisplayProps> = ({ sx }) => {
   const stack = useSelector<State, string[]>((state) => state.stack);
 
   return (
     <Box
       component="ul"
-      sx={{
-        gridArea: "sidebar",
-        listStyle: "none",
-        m: 0,
-        p: 0,
-        overflow: "auto",
-        minHeight: 0,
-        bgcolor: gruvbox.stackBackground,
-        color: gruvbox.stackForeground,
-        fontFamily: monospaceFontFamily,
-      }}
+      sx={[
+        {
+          listStyle: "none",
+          m: 0,
+          p: 0,
+          overflow: "auto",
+          minHeight: 0,
+          bgcolor: gruvbox.stackBackground,
+          color: gruvbox.stackForeground,
+          fontFamily: monospaceFontFamily,
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       {stack.map((value, index) => (
         <Box

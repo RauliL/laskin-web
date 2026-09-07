@@ -1,11 +1,15 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { LaskinContext, laskinValueToSource } from "laskin";
 import laskinWasmUrl from "laskin/laskin.wasm?url";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { contentPadding, gruvbox } from "../theme";
@@ -20,6 +24,9 @@ export type AppProps = {
 
 export const App: FunctionComponent<AppProps> = ({ context }) => {
   const dispatch = useDispatch<Dispatch<LaskinUIAction>>();
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
+  const [mobileTab, setMobileTab] = useState(0);
 
   const handleOutput = (text: string) => {
     if (!/^\s*$/.test(text)) {
@@ -49,13 +56,65 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
     }
   };
 
+  const replPanel = (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        overflow: "auto",
+        minHeight: 0,
+        height: "100%",
+        bgcolor: gruvbox.outputBackground,
+      }}
+    >
+      <OutputBuffer />
+      <InputBuffer onInput={handleInput} />
+    </Box>
+  );
+
+  if (isLargeScreen) {
+    return (
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateAreas: `"header header" "main sidebar"`,
+          gridTemplateColumns: "5fr 1fr",
+          gridTemplateRows: "auto 1fr",
+          height: "100vh",
+          overflow: "hidden",
+        }}
+      >
+        <AppBar
+          position="static"
+          elevation={0}
+          sx={{
+            gridArea: "header",
+            bgcolor: gruvbox.headerBackground,
+          }}
+        >
+          <Toolbar sx={{ ...contentPadding, minHeight: "unset" }}>
+            <Typography
+              component="h1"
+              variant="h6"
+              sx={{ color: gruvbox.headerForeground, fontWeight: 400 }}
+            >
+              🧮 Laskin
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        <Box sx={{ gridArea: "main", minHeight: 0 }}>{replPanel}</Box>
+
+        <StackDisplay sx={{ gridArea: "sidebar" }} />
+      </Box>
+    );
+  }
+
   return (
     <Box
       sx={{
-        display: "grid",
-        gridTemplateAreas: `"header header" "main sidebar"`,
-        gridTemplateColumns: "5fr 1fr",
-        gridTemplateRows: "auto 1fr",
+        display: "flex",
+        flexDirection: "column",
         height: "100vh",
         overflow: "hidden",
       }}
@@ -63,10 +122,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
       <AppBar
         position="static"
         elevation={0}
-        sx={{
-          gridArea: "header",
-          bgcolor: gruvbox.headerBackground,
-        }}
+        sx={{ bgcolor: gruvbox.headerBackground, flexShrink: 0 }}
       >
         <Toolbar sx={{ ...contentPadding, minHeight: "unset" }}>
           <Typography
@@ -79,21 +135,36 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
         </Toolbar>
       </AppBar>
 
-      <Box
+      <Tabs
+        value={mobileTab}
+        onChange={(_, value) => setMobileTab(value)}
+        variant="fullWidth"
         sx={{
-          gridArea: "main",
-          display: "flex",
-          flexDirection: "column",
-          overflow: "auto",
-          minHeight: 0,
-          bgcolor: gruvbox.outputBackground,
+          flexShrink: 0,
+          bgcolor: gruvbox.headerBackground,
+          minHeight: 48,
+          "& .MuiTab-root": {
+            color: gruvbox.headerForeground,
+            opacity: 0.7,
+            textTransform: "none",
+            fontSize: "1rem",
+          },
+          "& .Mui-selected": {
+            color: gruvbox.outputForeground,
+            opacity: 1,
+          },
+          "& .MuiTabs-indicator": {
+            bgcolor: gruvbox.outputForeground,
+          },
         }}
       >
-        <OutputBuffer />
-        <InputBuffer onInput={handleInput} />
-      </Box>
+        <Tab label="REPL" />
+        <Tab label="Stack" />
+      </Tabs>
 
-      <StackDisplay />
+      <Box sx={{ flex: 1, minHeight: 0, overflow: "hidden" }}>
+        {mobileTab === 0 ? replPanel : <StackDisplay sx={{ height: "100%" }} />}
+      </Box>
     </Box>
   );
 };
