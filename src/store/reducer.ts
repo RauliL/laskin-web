@@ -7,7 +7,7 @@ const initialState: State = {
 
 export const reducer = (
   state: State | undefined = initialState,
-  action: LaskinUIAction
+  action: LaskinUIAction,
 ): State => {
   switch (action.type) {
     case "ADD_LINE":

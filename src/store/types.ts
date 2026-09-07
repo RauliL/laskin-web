@@ -19,6 +19,4 @@ export type ClearAllLinesAction = Action<"CLEAR_ALL_LINES">;
 export type UpdateStackAction = Action<"UPDATE_STACK"> & { stack: string[] };
 
 export type LaskinUIAction =
-  | AddLineAction
-  | ClearAllLinesAction
-  | UpdateStackAction;
+  AddLineAction | ClearAllLinesAction | UpdateStackAction;

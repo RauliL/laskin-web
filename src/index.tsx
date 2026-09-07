@@ -11,7 +11,7 @@ import { createStore } from "./store";
 const context = await createContext();
 const store = createStore();
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 root.render(
@@ -19,5 +19,5 @@ root.render(
     <Provider store={store}>
       <App context={context} />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
