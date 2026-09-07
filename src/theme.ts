@@ -47,6 +47,8 @@ export const theme = createTheme({
       styleOverrides: (theme) => ({
         html: {
           fontSize: 18,
+          height: "100%",
+          overflow: "hidden",
           [theme.breakpoints.up("md")]: {
             fontSize: 16,
           },
@@ -54,6 +56,12 @@ export const theme = createTheme({
         body: {
           backgroundColor: gruvbox.outputBackground,
           color: gruvbox.outputForeground,
+          height: "100%",
+          overflow: "hidden",
+        },
+        "#root": {
+          height: "100%",
+          overflow: "hidden",
         },
       }),
     },

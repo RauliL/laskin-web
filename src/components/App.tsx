@@ -17,6 +17,7 @@ import { LaskinUIAction } from "../store";
 import { InputBuffer } from "./InputBuffer";
 import { OutputBuffer } from "./OutputBuffer";
 import { StackDisplay } from "./StackDisplay";
+import { useVisualViewportHeight } from "../hooks/useVisualViewportHeight";
 
 export type AppProps = {
   context: LaskinContext;
@@ -27,6 +28,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
   const [mobileTab, setMobileTab] = useState(0);
+  const viewportHeight = useVisualViewportHeight();
 
   const handleOutput = (text: string) => {
     if (!/^\s*$/.test(text)) {
@@ -113,9 +115,13 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
   return (
     <Box
       sx={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: viewportHeight,
         display: "flex",
         flexDirection: "column",
-        height: "100vh",
         overflow: "hidden",
       }}
     >

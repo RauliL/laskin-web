@@ -30,7 +30,6 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
           .finally(() => {
             input.value = "";
             input.focus();
-            input.scrollIntoView();
           });
       }
     } else if (ev.key === "l" && ev.ctrlKey) {
@@ -45,6 +44,9 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
       fullWidth
       onKeyDown={handleKeyDown}
       autoFocus
+      onFocus={() => {
+        requestAnimationFrame(() => window.scrollTo(0, 0));
+      }}
       sx={{
         display: "block",
         bgcolor: gruvbox.inputBackground,
