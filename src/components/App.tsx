@@ -1,5 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { Context, toSource } from "laskin";
+import { LaskinContext } from "laskin";
 import React, { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 
@@ -11,14 +11,16 @@ import { StackDisplay } from "./StackDisplay";
 import "./App.sass";
 
 export type AppProps = {
-  context: Context;
+  context: LaskinContext;
 };
 
 export const App: FunctionComponent<AppProps> = ({ context }) => {
   const dispatch = useDispatch<Dispatch<LaskinUIAction>>();
 
   const handleOutput = (text: string) => {
-    dispatch({ type: "ADD_LINE", line: { type: "output", text } });
+    if (!/^\s*$/.test(text)) {
+      dispatch({ type: "ADD_LINE", line: { type: "output", text } });
+    }
   };
 
   const handleInput = (text: string) =>
@@ -26,7 +28,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
       dispatch({ type: "ADD_LINE", line: { type: "input", text } });
 
       try {
-        context.exec(text, handleOutput);
+        handleOutput(context.run(text));
         resolve();
       } catch (err) {
         dispatch({ type: "ADD_LINE", line: { type: "error", text: `${err}` } });
@@ -34,7 +36,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
       } finally {
         dispatch({
           type: "UPDATE_STACK",
-          stack: Array.from(context).map(toSource),
+          stack: Array.from(context).map(String),
         });
       }
     });

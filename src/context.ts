@@ -1,13 +1,13 @@
-import { Context, newQuoteValue, SymbolNode } from "laskin";
+import { LaskinContext, createLaskin } from "laskin";
+import laskinWasmUrl from "../node_modules/laskin/laskin.wasm?url";
 
-export const createContext = (): Context => {
-  const context = new Context();
-  const addAlias = (a: string, b: string) => {
-    context.define(a, newQuoteValue([{ type: "Symbol", id: b } as SymbolNode]));
-  };
+export const createContext = async (): Promise<LaskinContext> => {
+  const context = await createLaskin({
+    locateFile: () => laskinWasmUrl,
+  });
 
-  addAlias("×", "*");
-  addAlias("÷", "/");
+  context.run("(*) -> ×");
+  context.run("(/) -> ÷");
 
   return context;
 };

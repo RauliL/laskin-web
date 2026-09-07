@@ -8,7 +8,7 @@ import { App } from "./components";
 import { createContext } from "./context";
 import { createStore } from "./store";
 
-const context = createContext();
+const context = await createContext();
 const store = createStore();
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

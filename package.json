@@ -22,6 +22,7 @@
   },
   "scripts": {
     "start": "vite start",
+    "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -30,12 +31,13 @@
     "@types/react": "^18.2.41",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^6.0.1",
-    "laskin": "^2.1.0",
+    "laskin": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.0",
     "sass": "^1.99.0",
     "typescript": "^5.9.2",
     "vite": "^8.0.8"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
