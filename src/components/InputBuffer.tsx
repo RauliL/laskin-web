@@ -44,6 +44,11 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
       fullWidth
       onKeyDown={handleKeyDown}
       autoFocus
+      inputProps={{
+        autoCapitalize: "off",
+        autoCorrect: "off",
+        spellCheck: false,
+      }}
       onFocus={() => {
         requestAnimationFrame(() => window.scrollTo(0, 0));
       }}
