@@ -1,9 +1,10 @@
 import { Dispatch } from "@reduxjs/toolkit";
+import InputBase from "@mui/material/InputBase";
 import React, { FunctionComponent, KeyboardEvent, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { LaskinUIAction } from "../store";
 
-import "./InputBuffer.sass";
+import { contentPadding, gruvbox, monospaceFontFamily } from "../theme";
+import { LaskinUIAction } from "../store";
 
 export type InputBufferProps = {
   onInput: (text: string) => Promise<void>;
@@ -14,6 +15,7 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
 }) => {
   const dispatch = useDispatch<Dispatch<LaskinUIAction>>();
   const inputRef = useRef<HTMLInputElement>(null);
+
   const handleKeyDown = (ev: KeyboardEvent) => {
     const input = inputRef.current;
 
@@ -38,11 +40,22 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
   };
 
   return (
-    <input
-      ref={inputRef}
-      className="InputBuffer"
+    <InputBase
+      inputRef={inputRef}
+      fullWidth
       onKeyDown={handleKeyDown}
       autoFocus
+      sx={{
+        display: "block",
+        bgcolor: gruvbox.inputBackground,
+        color: gruvbox.inputForeground,
+        fontFamily: monospaceFontFamily,
+        ...contentPadding,
+        "& .MuiInputBase-input": {
+          fontFamily: monospaceFontFamily,
+          p: 0,
+        },
+      }}
     />
   );
 };
