@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import { contentPadding, gruvbox, monospaceFontFamily } from "../theme";
@@ -18,35 +18,55 @@ const lineColor = (type: Line["type"]) => {
 
 export const OutputBuffer: FunctionComponent = () => {
   const lines = useSelector<State, Line[]>((state) => state.lines);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }, [lines]);
 
   return (
     <Box
-      component="ul"
+      ref={scrollRef}
       sx={{
-        listStyle: "none",
-        m: 0,
-        p: 0,
         flex: 1,
-        fontFamily: monospaceFontFamily,
+        minHeight: 0,
+        overflow: "auto",
       }}
     >
-      {lines.map((line, index) => (
-        <Box
-          component="li"
-          key={index}
-          sx={{
-            ...contentPadding,
-            color: lineColor(line.type),
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-            "&:hover": {
-              bgcolor: gruvbox.outputHoverBackground,
-            },
-          }}
-        >
-          {line.text}
-        </Box>
-      ))}
+      <Box
+        component="ul"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          minHeight: "100%",
+          listStyle: "none",
+          m: 0,
+          p: 0,
+          fontFamily: monospaceFontFamily,
+        }}
+      >
+        {lines.map((line, index) => (
+          <Box
+            component="li"
+            key={index}
+            sx={{
+              ...contentPadding,
+              color: lineColor(line.type),
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              "&:hover": {
+                bgcolor: gruvbox.outputHoverBackground,
+              },
+            }}
+          >
+            {line.text}
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };

@@ -61,9 +61,9 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        overflow: "auto",
         minHeight: 0,
         height: "100%",
+        overflow: "hidden",
         bgcolor: gruvbox.outputBackground,
       }}
     >
