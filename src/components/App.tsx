@@ -1,5 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { LaskinContext } from "laskin";
+import { LaskinContext, laskinValueToSource } from "laskin";
+import laskinWasmUrl from "laskin/laskin.wasm?url";
 import React, { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 
@@ -23,23 +24,27 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
     }
   };
 
-  const handleInput = (text: string) =>
-    new Promise<void>((resolve, reject) => {
-      dispatch({ type: "ADD_LINE", line: { type: "input", text } });
+  const handleInput = async (text: string): Promise<void> => {
+    dispatch({ type: "ADD_LINE", line: { type: "input", text } });
 
-      try {
-        handleOutput(context.run(text));
-        resolve();
-      } catch (err) {
-        dispatch({ type: "ADD_LINE", line: { type: "error", text: `${err}` } });
-        reject(err);
-      } finally {
-        dispatch({
-          type: "UPDATE_STACK",
-          stack: Array.from(context).map(String),
-        });
-      }
-    });
+    try {
+      handleOutput(context.run(text));
+    } catch (err) {
+      dispatch({ type: "ADD_LINE", line: { type: "error", text: `${err}` } });
+      throw err;
+    } finally {
+      dispatch({
+        type: "UPDATE_STACK",
+        stack: await Promise.all(
+          context
+            .stack()
+            .map((value) =>
+              laskinValueToSource(value, { locateFile: () => laskinWasmUrl }),
+            ),
+        ),
+      });
+    }
+  };
 
   return (
     <div className="App">
