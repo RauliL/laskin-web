@@ -3,9 +3,9 @@ import React, { FunctionComponent, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import { contentPadding, gruvbox, monospaceFontFamily } from "../theme";
-import { Line, State } from "../store";
+import { Line, LineType, State } from "../store";
 
-const lineColor = (type: Line["type"]) => {
+const lineColor = (type: LineType) => {
   switch (type) {
     case "error":
       return gruvbox.outputErrorForeground;
@@ -22,6 +22,7 @@ export const OutputBuffer: FunctionComponent = () => {
 
   useEffect(() => {
     const container = scrollRef.current;
+
     if (container) {
       container.scrollTop = container.scrollHeight;
     }

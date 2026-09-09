@@ -8,6 +8,7 @@ export const useVisualViewportHeight = (): number => {
 
   useEffect(() => {
     const viewport = window.visualViewport;
+
     if (!viewport) {
       return;
     }
