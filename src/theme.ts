@@ -11,6 +11,7 @@ export const gruvbox = {
   outputInputForeground: "#a89984",
   outputErrorForeground: "#cc241d",
   outputHoverBackground: "#3c3836",
+  outputStackPreviewForeground: "#83a598",
   stackBackground: "#000000",
   stackForeground: "#fbf1c7",
   stackHoverBackground: "#1d2021",

@@ -64,6 +64,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
         display: "flex",
         flexDirection: "column",
         minHeight: 0,
+        minWidth: 0,
         height: "100%",
         overflow: "hidden",
         bgcolor: gruvbox.outputBackground,
@@ -105,7 +106,9 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
           </Toolbar>
         </AppBar>
 
-        <Box sx={{ gridArea: "main", minHeight: 0 }}>{replPanel}</Box>
+        <Box sx={{ gridArea: "main", minHeight: 0, minWidth: 0 }}>
+          {replPanel}
+        </Box>
 
         <StackDisplay sx={{ gridArea: "sidebar" }} />
       </Box>
