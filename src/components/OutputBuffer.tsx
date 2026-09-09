@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import React, { FunctionComponent, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
+import { useLongPressSelect } from "../hooks/useLongPressSelect";
 import { contentPadding, gruvbox, monospaceFontFamily } from "../theme";
 import { Line, LineType, State } from "../store";
 
@@ -25,6 +26,7 @@ export const OutputBuffer: FunctionComponent = () => {
     (state) => state.stack[0],
   );
   const scrollRef = useRef<HTMLDivElement>(null);
+  const longPressSelect = useLongPressSelect();
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -71,11 +73,14 @@ export const OutputBuffer: FunctionComponent = () => {
             <Box
               component="li"
               key={index}
+              {...longPressSelect}
               sx={{
                 ...contentPadding,
                 color: lineColor(line.type),
                 whiteSpace: "pre-wrap",
                 wordBreak: "break-word",
+                userSelect: "text",
+                WebkitUserSelect: "text",
                 "&:hover": {
                   bgcolor: gruvbox.outputHoverBackground,
                 },
@@ -90,6 +95,7 @@ export const OutputBuffer: FunctionComponent = () => {
       {topOfStack !== undefined && (
         <Box
           title={topOfStack}
+          {...longPressSelect}
           sx={{
             ...contentPadding,
             flexShrink: 0,
@@ -97,6 +103,8 @@ export const OutputBuffer: FunctionComponent = () => {
             maxWidth: "100%",
             color: gruvbox.outputStackPreviewForeground,
             fontFamily: monospaceFontFamily,
+            userSelect: "text",
+            WebkitUserSelect: "text",
             borderTop: `1px solid ${gruvbox.outputHoverBackground}`,
           }}
         >
