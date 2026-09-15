@@ -15,6 +15,11 @@ export const gruvbox = {
   stackBackground: "#000000",
   stackForeground: "#fbf1c7",
   stackHoverBackground: "#1d2021",
+  syntaxComment: "#7c6f64",
+  syntaxString: "#5c5a0a",
+  syntaxNumber: "#8f5a0a",
+  syntaxDelimiter: "#9d0006",
+  syntaxSymbol: "#7a2e5a",
 } as const;
 
 export const contentPadding = {

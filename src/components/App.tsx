@@ -9,7 +9,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Context, valueToSource } from "laskin";
 import laskinWasmUrl from "laskin/laskin.wasm?url";
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { contentPadding, gruvbox } from "../theme";
@@ -28,7 +28,14 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
   const [mobileTab, setMobileTab] = useState(0);
+  const [dictionaryWords, setDictionaryWords] = useState(
+    () => new Set(Object.keys(context.dictionary())),
+  );
   const viewportHeight = useVisualViewportHeight();
+
+  const refreshDictionaryWords = useCallback(() => {
+    setDictionaryWords(new Set(Object.keys(context.dictionary())));
+  }, [context]);
 
   const handleOutput = (text: string) => {
     if (!/^\s*$/.test(text)) {
@@ -45,6 +52,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
       dispatch({ type: "ADD_LINE", line: { type: "error", text: `${err}` } });
       throw err;
     } finally {
+      refreshDictionaryWords();
       dispatch({
         type: "UPDATE_STACK",
         stack: await Promise.all(
@@ -71,7 +79,10 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
       }}
     >
       <OutputBuffer />
-      <InputBuffer onInput={handleInput} />
+      <InputBuffer
+        onInput={handleInput}
+        dictionaryWords={dictionaryWords}
+      />
     </Box>
   );
 
