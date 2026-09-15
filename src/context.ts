@@ -1,7 +1,7 @@
-import { LaskinContext, createContext as createLaskin } from "laskin";
+import { Context, createContext as createLaskin } from "laskin";
 import laskinWasmUrl from "laskin/laskin.wasm?url";
 
-export const createContext = async (): Promise<LaskinContext> => {
+export const createContext = async (): Promise<Context> => {
   const context = await createLaskin({ locateFile: () => laskinWasmUrl });
 
   context.run("(*) -> ×");

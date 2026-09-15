@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { LaskinContext, laskinValueToSource } from "laskin";
+import { Context, valueToSource } from "laskin";
 import laskinWasmUrl from "laskin/laskin.wasm?url";
 import React, { FunctionComponent, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ import { StackDisplay } from "./StackDisplay";
 import { useVisualViewportHeight } from "../hooks/useVisualViewportHeight";
 
 export type AppProps = {
-  context: LaskinContext;
+  context: Context;
 };
 
 export const App: FunctionComponent<AppProps> = ({ context }) => {
@@ -51,7 +51,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
           context
             .stack()
             .map((value) =>
-              laskinValueToSource(value, { locateFile: () => laskinWasmUrl }),
+              valueToSource(value, { locateFile: () => laskinWasmUrl }),
             ),
         ),
       });
