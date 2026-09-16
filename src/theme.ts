@@ -20,12 +20,12 @@ export const gruvbox = {
   syntaxNumber: "#8f5a0a",
   syntaxDelimiter: "#9d0006",
   syntaxSymbol: "#7a2e5a",
-} as const;
+};
 
 export const contentPadding = {
   py: "1em",
   px: "1.5em",
-} as const;
+};
 
 export const monospaceFontFamily = '"Inconsolata", monospace';
 
