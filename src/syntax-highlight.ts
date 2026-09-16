@@ -1,9 +1,5 @@
 export type HighlightKind =
-  | "comment"
-  | "string"
-  | "number"
-  | "delimiter"
-  | "symbol";
+  "comment" | "string" | "number" | "delimiter" | "symbol";
 
 export type HighlightSpan = {
   start: number;

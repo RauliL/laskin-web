@@ -79,10 +79,7 @@ export const App: FunctionComponent<AppProps> = ({ context }) => {
       }}
     >
       <OutputBuffer />
-      <InputBuffer
-        onInput={handleInput}
-        dictionaryWords={dictionaryWords}
-      />
+      <InputBuffer onInput={handleInput} dictionaryWords={dictionaryWords} />
     </Box>
   );
 
