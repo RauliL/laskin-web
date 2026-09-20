@@ -36,6 +36,9 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const highlightRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState("");
+  const [history, setHistory] = useState<string[]>([]);
+  const historyIndexRef = useRef<number | null>(null);
+  const draftRef = useRef("");
 
   const segments = useMemo(
     () => highlightSegments(value, dictionaryWords),
@@ -51,12 +54,21 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
     }
   };
 
+  const resetHistoryNavigation = () => {
+    historyIndexRef.current = null;
+    draftRef.current = "";
+  };
+
   const handleKeyDown = (ev: KeyboardEvent) => {
     if (ev.key === "Enter") {
       const text = value.trim();
 
       ev.preventDefault();
       if (!/^\s*$/.test(text)) {
+        setHistory((prev) =>
+          prev[prev.length - 1] === text ? prev : [...prev, text],
+        );
+        resetHistoryNavigation();
         onInput(text)
           .then(() => {})
           .catch(() => {})
@@ -64,6 +76,34 @@ export const InputBuffer: FunctionComponent<InputBufferProps> = ({
             setValue("");
             inputRef.current?.focus();
           });
+      }
+    } else if (ev.key === "ArrowUp") {
+      if (history.length === 0) {
+        return;
+      }
+
+      ev.preventDefault();
+      if (historyIndexRef.current === null) {
+        draftRef.current = value;
+        historyIndexRef.current = history.length - 1;
+      } else if (historyIndexRef.current > 0) {
+        historyIndexRef.current -= 1;
+      }
+      setValue(history[historyIndexRef.current]);
+    } else if (ev.key === "ArrowDown") {
+      if (historyIndexRef.current === null) {
+        return;
+      }
+
+      ev.preventDefault();
+      if (historyIndexRef.current < history.length - 1) {
+        historyIndexRef.current += 1;
+        setValue(history[historyIndexRef.current]);
+      } else {
+        const draft = draftRef.current;
+
+        resetHistoryNavigation();
+        setValue(draft);
       }
     } else if (ev.key === "l" && ev.ctrlKey) {
       ev.preventDefault();
